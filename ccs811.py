@@ -8,7 +8,7 @@ class CCS811(object):
 		self.bus = smbus.SMBus(self.device_bus)
 
 	def read_byte_data(self, address):
-		return bus.read_byte_data(self.device_address, address)
+		return self.bus.read_byte_data(self.device_address, address)
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
