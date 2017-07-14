@@ -11,7 +11,7 @@ class CCS811(object):
 		return self.bus.read_byte_data(self.device_address, address)
 
 	def write_byte_data(self, address, data):
-		self.bus.write_byte_data(address, 0, data)
+		self.bus.write_byte(address, data)
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
