@@ -16,6 +16,6 @@ class CCS811(object):
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
-	byte = my_ccs811.read_byte_data(0x81)
+	byte = my_ccs811.read_byte_data(0x20)
 	print(format(byte, '02x'))
 	
