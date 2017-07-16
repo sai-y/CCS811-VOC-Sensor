@@ -12,7 +12,7 @@ class CCS811(object):
 		return self.bus.read_byte_data(self.device_address, address)
 
 	def write_byte(self, address, data):
-		self.bus.write_byte_data(self.device_address, address)
+		self.bus.write_byte_data(self.device_address, address, data)
 
 	def write_quick(self, address):
 		self.bus.write_quick(self.device_address)
