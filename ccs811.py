@@ -14,15 +14,16 @@ class CCS811(object):
 	def write_byte_data(self, address, data):
 		self.bus.write_byte_data(self.device_address, address, data)
 
-	def write_quick(self, address):
-		self.bus.write_i2c_block_data(self.device_address, address, [0x00])
+	def write_quick(self, address, vals):
+		self.bus.write_i2c_block_data(self.device_address, address, vals)
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
+	my_ccs811.write_quick(0xFF, [ 0x11, 0xE5, 0x72, 0x8A])
 	byte = my_ccs811.read_byte_data(0x20)
 	print(format(byte, '02x'))
 
-	my_ccs811.write_quick(0xF4)
+	my_ccs811.write_quick(0xF4, [0x00])
 	byte = my_ccs811.read_byte_data(0x00)
 	print(format(byte, '02x'))
 	
