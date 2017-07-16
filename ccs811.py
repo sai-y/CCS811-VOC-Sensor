@@ -27,7 +27,7 @@ if __name__ == "__main__":
 	byte = my_ccs811.read_byte_data(0x20)
 	print(format(byte, '02x'))
 
-	my_ccs811.write_quick(0xF4, [0x00])
+	my_ccs811.write_quick(0xF4)
 	time.sleep(1)
 	my_ccs811.write_byte(0x00)
 	byte = my_ccs811.read_byte_data(0x00)
