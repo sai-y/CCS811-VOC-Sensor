@@ -1,4 +1,4 @@
-import smbus
+import smbus2 as smbus
 import time
 
 class CCS811(object):
