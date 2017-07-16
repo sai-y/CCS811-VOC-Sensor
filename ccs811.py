@@ -15,7 +15,7 @@ class CCS811(object):
 		self.bus.write_byte(self.device_address, address)
 
 	def write_quick(self, address, vals):
-		self.bus.write_i2c_block_data(self.device_address, address, [])
+		self.bus.write_i2c_block_data(self.device_address, address, vals)
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
