@@ -11,8 +11,8 @@ class CCS811(object):
 	def read_byte_data(self, address):
 		return self.bus.read_byte_data(self.device_address, address)
 
-	def write_byte(self, address):
-		self.bus.write_byte(self.device_address, address)
+	def write_byte(self, address, data):
+		self.bus.write_byte_data(self.device_address, address)
 
 	def write_quick(self, address):
 		self.bus.write_quick(self.device_address)
@@ -27,10 +27,8 @@ if __name__ == "__main__":
 	byte = my_ccs811.read_byte_data(0x20)
 	print(format(byte, '02x'))
 
-	my_ccs811.write_byte(0xF4)
-	my_ccs811.write_byte(0xF4)
-	time.sleep(1)
-	my_ccs811.write_byte(0x00)
+	my_ccs811.write_byte(0xF4, 0x00)
+	my_ccs811.write_byte(0xF4, 0x00)
 	byte = my_ccs811.read_byte_data(0x00)
 	print(format(byte, '02x'))
 	
