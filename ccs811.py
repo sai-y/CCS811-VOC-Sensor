@@ -20,6 +20,7 @@ class CCS811(object):
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
 	my_ccs811.write_quick(0xFF, [ 0x11, 0xE5, 0x72, 0x8A])
+	time.sleep(1)
 	byte = my_ccs811.read_byte_data(0x00)
 	print(format(byte, '02x'))
 
