@@ -9,6 +9,8 @@ class CCS811(object):
 		self.bus = I2C("/dev/i2c-1")
 
 	def read_byte_data(self, address):
+		msgs = [I2C.Message([address], read=False)]
+		self.bus.transfer(self.device_address, msgs)
 		msgs = [I2C.Message([address], read=True)]
 		self.bus.transfer(self.device_address, msgs)
 		print(len(msgs))
