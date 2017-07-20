@@ -1,5 +1,5 @@
 from periphery import I2C
-import time
+import timealt
 
 class CCS811(object):
 
@@ -8,11 +8,14 @@ class CCS811(object):
 		self.device_address = device_address
 		self.bus = I2C("/dev/i2c-1")
 
-	def read_byte_data(self, address):
+	def read_register(self, address):
 		msgs = [I2C.Message([address], read=True)]
 		self.bus.transfer(self.device_address, msgs)
-		
-		print(msgs[0].data[0])
+		return msgs[0].data[0]
+
+	def start_command(self, data):
+		msg = [I2C.Message([0xF4])]
+		self.bus.transfer(self.device_address, msg)
 
 	def write_byte(self, address):
 		msgs = [I2C.Message([address], read=False)]
@@ -28,7 +31,7 @@ if __name__ == "__main__":
 	my_ccs811 = CCS811()
 	#my_ccs811.write_block_data(0xFF, [ 0x11, 0xE5, 0x72, 0x8A])
 	time.sleep(1)
-	my_ccs811.read_byte_data(0x20)
+	print(my_ccs811.read_byte_data(0x00))
 	#print(byte)
 
 	#my_ccs811.write_byte(0xF4)
