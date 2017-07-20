@@ -1,5 +1,5 @@
 from periphery import I2C
-import timealt
+import time
 
 class CCS811(object):
 
