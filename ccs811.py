@@ -29,7 +29,7 @@ class CCS811(object):
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
-	my_ccs811.sw_reset()
+	#my_ccs811.sw_reset()
 	print(format(my_ccs811.read_register(0x00), '02x'))
 	#print(byte)
 
