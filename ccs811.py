@@ -21,8 +21,9 @@ class CCS811(object):
 		msgs = [I2C.Message([address], read=False)]
 		self.bus.transfer(self.device_address, msgs)
 
-	def write_quick(self, address):
-		self.bus.write_quick(self.device_address)
+	def write_quick(self):
+		msgs = [I2C.Message([0xFF, 0x11, 0xE5, 0x72, 0x8A], read=False)]
+		self.bus.transfer(self.device_address, msgs)
 
 	def write_block_data(self, address, vals):
 		self.bus.write_i2c_block_data(self.device_address, address, vals)
