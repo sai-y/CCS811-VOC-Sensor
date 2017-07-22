@@ -34,7 +34,7 @@ if __name__ == "__main__":
 	my_ccs811.read_byte_data(0x20)
 	#print(byte)
 
-	#my_ccs811.write_byte(0xF4)
+	my_ccs811.write_byte(0xF4)
 	my_ccs811.read_byte_data(0x00)
 	#my_ccs811.write_byte(0xF4, 0x00)
 	#byte = my_ccs811.read_byte_data(0x00)
