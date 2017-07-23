@@ -32,7 +32,6 @@ if __name__ == "__main__":
 	my_ccs811 = CCS811()
 	#my_ccs811.write_block_data(0xFF, [ 0x11, 0xE5, 0x72, 0x8A])
 	
-	my_ccs811.read_byte_data(0x00)
 	my_ccs811.write_quick()
 	time.sleep(1)
 	my_ccs811.read_byte_data(0x00)
