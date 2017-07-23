@@ -8,7 +8,7 @@ class CCS811(object):
 		self.device_address = device_address
 		self.bus = I2C("/dev/i2c-1")
 
-	def read_byte_data(self, address):
+	def read_byte(self, address):
 		msgs = [I2C.Message([address], read=False)]
 		self.bus.transfer(self.device_address, msgs)
 
@@ -21,12 +21,13 @@ class CCS811(object):
 		msgs = [I2C.Message([address], read=False)]
 		self.bus.transfer(self.device_address, msgs)
 
-	def write_quick(self):
+	def reset(self):
 		msgs = [I2C.Message([0xFF, 0x11, 0xE5, 0x72, 0x8A], read=False)]
 		self.bus.transfer(self.device_address, msgs)
 
-	def write_block_data(self, address, vals):
-		self.bus.write_i2c_block_data(self.device_address, address, vals)
+	def write_byte_data(self, address, data):
+		msgs = [I2C.Message([address, data], read=False)]
+		self.bus.transfer(self.device_address, msgs)
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
@@ -34,12 +35,14 @@ if __name__ == "__main__":
 	
 	my_ccs811.write_quick()
 	time.sleep(1)
-	my_ccs811.read_byte_data(0x00)
-	my_ccs811.read_byte_data(0x20)
+	my_ccs811.read_byte(0x00)
+	my_ccs811.read_byte(0x20)
 	#print(byte)
 
 	my_ccs811.write_byte(0xF4)
-	my_ccs811.read_byte_data(0x00)
+	my_ccs811.read_byte(0x00)
+	my_ccs811.write_byte_data(0x01, 0x10)
+	my_ccs811.read_byte(0x00)
 	#my_ccs811.write_byte(0xF4, 0x00)
 	#byte = my_ccs811.read_byte_data(0x00)
 	#print(format(byte, '02x'))
