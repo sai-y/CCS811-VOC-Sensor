@@ -31,25 +31,24 @@ class CCS811(object):
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
-	#my_ccs811.write_block_data(0xFF, [ 0x11, 0xE5, 0x72, 0x8A])
+	my_ccs811.reset()
 	
-	my_ccs811.reset()
-	my_ccs811.reset()
 	time.sleep(1)
+	
 	my_ccs811.read_byte(0x00)
 	my_ccs811.read_byte(0x20)
-	#print(byte)
 
 	my_ccs811.write_byte(0xF4)
 	my_ccs811.read_byte(0x00)
+	
 	my_ccs811.write_byte_data(0x01, 0x10)
 	my_ccs811.read_byte(0x00)
+	
 	time.sleep(1)
+	
 	my_ccs811.read_byte(0x00)
+	
 	while True:
 		my_ccs811.read_byte(0x00)
 		time.sleep(1)
-	#my_ccs811.write_byte(0xF4, 0x00)
-	#byte = my_ccs811.read_byte_data(0x00)
-	#print(format(byte, '02x'))
 	
