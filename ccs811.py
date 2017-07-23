@@ -57,5 +57,7 @@ if __name__ == "__main__":
 		if my_ccs811.read_byte(0x00) == 0x98:
 			my_ccs811.write_byte(0x02)
 			my_ccs811.read_bytes(4)
+		else:
+			print(my_ccs811.read_byte(0x00))
 		time.sleep(1)
 	
