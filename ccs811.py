@@ -54,7 +54,7 @@ if __name__ == "__main__":
 	my_ccs811.read_byte(0x00)
 	
 	while True:
-		if my_ccs811.read_byte(0x00) == 0x98:
+		if my_ccs811.read_byte(0x00) == [0x98]:
 			my_ccs811.write_byte(0x02)
 			my_ccs811.read_bytes(4)
 		else:
