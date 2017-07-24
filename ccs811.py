@@ -11,7 +11,7 @@ class CCS811(object):
 	def read_byte(self, address):
 		msgs = [I2C.Message([address], read=False)]
 		self.bus.transfer(self.device_address, msgs)
-		time.sleep(0.0625)
+
 		msgs = [I2C.Message([address], read=True)]
 		self.bus.transfer(self.device_address, msgs)
 		
@@ -56,7 +56,7 @@ if __name__ == "__main__":
 	while True:
 		if my_ccs811.read_byte(0x00) == 152:
 			my_ccs811.write_byte(0x02)
-			time.sleep(0.0625)
+			
 			data = my_ccs811.read_bytes(8)
 			print(data)
 			eco2 = data[0] << 8 | data[1]
