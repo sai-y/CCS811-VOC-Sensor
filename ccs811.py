@@ -55,7 +55,7 @@ if __name__ == "__main__":
 	
 	while True:
 		if my_ccs811.read_byte(0x00) == 152:
-			#my_ccs811.write_byte(0x02)
+			my_ccs811.write_byte(0x02)
 			time.sleep(0.0625)
 			data = my_ccs811.read_bytes(4)
 			print(data)
