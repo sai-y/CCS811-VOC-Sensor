@@ -72,5 +72,5 @@ if __name__ == "__main__":
 				my_ccs811.reset()
 				time.sleep(1)
 			print(my_ccs811.read_byte(0x00))
-		time.sleep(1)
+		time.sleep(0.11)
 	
