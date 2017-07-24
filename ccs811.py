@@ -58,6 +58,7 @@ if __name__ == "__main__":
 			#my_ccs811.write_byte(0x02)
 			time.sleep(0.0625)
 			data = my_ccs811.read_bytes(4)
+			print(data)
 			eco2 = data[0] << 8 | data[1]
 			voc = data[2] << 8 | data[3]
 			print(eco2, voc)
