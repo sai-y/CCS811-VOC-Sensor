@@ -46,7 +46,7 @@ if __name__ == "__main__":
 	my_ccs811.write_byte(0xF4)
 	print(my_ccs811.read_byte(0x00))
 	
-	my_ccs811.write_byte_data(0x01, 0x20)
+	my_ccs811.write_byte_data(0x01, 0x10)
 	print(my_ccs811.read_byte(0x00))
 	
 	time.sleep(1)
@@ -66,5 +66,5 @@ if __name__ == "__main__":
 			if my_ccs811.read_byte(0x00) & 0x01:
 				my_ccs811.reset()
 			print(my_ccs811.read_byte(0x00))
-		time.sleep(10)
+		time.sleep(1)
 	
