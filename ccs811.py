@@ -12,7 +12,7 @@ class CCS811(object):
 		msgs = [I2C.Message([address], read=False)]
 		self.bus.transfer(self.device_address, msgs)
 		time.sleep(0.0625)
-		msgs = [I2C.Message([address, 0 , 0 , 0, 0], read=True)]
+		msgs = [I2C.Message([address], read=True)]
 		self.bus.transfer(self.device_address, msgs)
 		
 		return (msgs[0].data[0])
