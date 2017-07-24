@@ -62,5 +62,5 @@ if __name__ == "__main__":
 			print(eco2, voc)
 		else:
 			print(my_ccs811.read_byte(0x00))
-		time.sleep(1)
+		time.sleep(2)
 	
