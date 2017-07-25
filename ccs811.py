@@ -9,6 +9,8 @@ class CCS811(object):
 		self.bus = I2C("/dev/i2c-1")
 
 	def start_app(self):
+		my_ccs811.write_byte(0xF4)
+		print(my_ccs811.read_byte(0x00))
 		my_ccs811.write_byte_data(0x01, 0x10)
 
 	def close(self):
@@ -49,8 +51,6 @@ if __name__ == "__main__":
 	print(my_ccs811.read_byte(0x00))
 	print(my_ccs811.read_byte(0x20))
 
-	my_ccs811.write_byte(0xF4)
-	print(my_ccs811.read_byte(0x00))
 	my_ccs811.start_app()
 	time.sleep(1)
 	
