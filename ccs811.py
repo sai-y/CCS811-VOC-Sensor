@@ -73,6 +73,7 @@ if __name__ == "__main__":
 				my_ccs811.reset()
 				time.sleep(1)
 				my_ccs811.start_app()
+				print("Got here")
 			print(my_ccs811.read_byte(0x00))
 		time.sleep(1)
 	
