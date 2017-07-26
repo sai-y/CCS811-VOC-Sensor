@@ -13,34 +13,40 @@ class CCS811(object):
 		print(my_ccs811.read_byte(0x00))
 		my_ccs811.write_byte_data(0x01, 0x10)
 
+	def transfer(self, msgs):
+		try:
+			self.bus.transfer(self.device_address, msgs)
+		except periphery.i2c.I2CError as error:
+			print(str(error))
+		return msgs
+
 	def close(self):
 		self.bus.close()
 
 	def read_byte(self, address):
 		msgs = [I2C.Message([address], read=False)]
-		self.bus.transfer(self.device_address, msgs)
-
+		self.transfer(msgs)
 		msgs = [I2C.Message([address], read=True)]
-		self.bus.transfer(self.device_address, msgs)
+		data = self.transfer(msgs)
 		
-		return (msgs[0].data[0])
+		return (data[0])
 
 	def write_byte(self, address):
 		msgs = [I2C.Message([address], read=False)]
-		self.bus.transfer(self.device_address, msgs)
+		self.transfer(msgs)
 
 	def reset(self):
 		msgs = [I2C.Message([0xFF, 0x11, 0xE5, 0x72, 0x8A], read=False)]
-		self.bus.transfer(self.device_address, msgs)
+		self.transfer(msgs)
 
 	def write_byte_data(self, address, data):
 		msgs = [I2C.Message([address, data], read=False)]
-		self.bus.transfer(self.device_address, msgs)
+		self.transfer(msgs)
 
 	def read_bytes(self, count):
 		msgs = [I2C.Message([0] * count, read=True)]
-		self.bus.transfer(self.device_address, msgs)
-		return (msgs[0].data)
+		data = self.transfer(msgs)
+		return data
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
@@ -68,12 +74,12 @@ if __name__ == "__main__":
 			print(eco2, voc)
 		else:
 			if my_ccs811.read_byte(0x00) & 0x01:
-				my_ccs811.close()
-				my_ccs811 = CCS811()
-				my_ccs811.reset()
+				#my_ccs811.close()
+				#my_ccs811 = CCS811()
+				#my_ccs811.reset()
 				time.sleep(1)
-				my_ccs811.start_app()
-				print("Got here")
+				#my_ccs811.start_app()
+
 			print(my_ccs811.read_byte(0x00))
 		time.sleep(1)
 	
