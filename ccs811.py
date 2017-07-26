@@ -27,9 +27,9 @@ class CCS811(object):
 		msgs = [I2C.Message([address], read=False)]
 		self.transfer(msgs)
 		msgs = [I2C.Message([address], read=True)]
-		data = self.transfer(msgs)
+		ret_msg = self.transfer(msgs)
 		
-		return (data[0])
+		return (ret_msg.data[0])
 
 	def write_byte(self, address):
 		msgs = [I2C.Message([address], read=False)]
@@ -45,8 +45,8 @@ class CCS811(object):
 
 	def read_bytes(self, count):
 		msgs = [I2C.Message([0] * count, read=True)]
-		data = self.transfer(msgs)
-		return data
+		ret_msg = self.transfer(msgs)
+		return ret_msg.data
 
 if __name__ == "__main__":
 	my_ccs811 = CCS811()
