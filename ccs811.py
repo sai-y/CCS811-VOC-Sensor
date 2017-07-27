@@ -1,4 +1,5 @@
-from periphery import I2C
+import periphery
+from periphery import I2C, I2CError
 import time
 
 class CCS811(object):
@@ -16,7 +17,7 @@ class CCS811(object):
 	def transfer(self, msgs):
 		try:
 			self.bus.transfer(self.device_address, msgs)
-		except periphery.i2c.I2CError as error:
+		except I2CError as error:
 			print(str(error))
 		return msgs
 
