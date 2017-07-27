@@ -74,11 +74,11 @@ if __name__ == "__main__":
 			print(eco2, voc)
 		else:
 			if my_ccs811.read_byte(0x00) & 0x01:
-				#my_ccs811.close()
-				#my_ccs811 = CCS811()
-				#my_ccs811.reset()
+				my_ccs811.close()
+				my_ccs811 = CCS811()
+				my_ccs811.reset()
 				time.sleep(1)
-				#my_ccs811.start_app()
+				my_ccs811.start_app()
 
 			print(my_ccs811.read_byte(0x00))
 		time.sleep(1)
