@@ -1,6 +1,6 @@
-import periphery
 from periphery import I2C, I2CError
 import time
+
 
 class CCS811(object):
 
