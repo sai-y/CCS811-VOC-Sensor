@@ -5,7 +5,7 @@ import time
 class CCS811(object):
 
     def __init__(self, device_bus=1, device_address=0x5B):
-        self.device_bus = device_bus 
+        self.device_bus = device_bus
         self.device_address = device_address
         self.bus = I2C("/dev/i2c-1")
 
@@ -29,7 +29,7 @@ class CCS811(object):
         self.transfer(msgs)
         msgs = [I2C.Message([address], read=True)]
         ret_msg = self.transfer(msgs)
-        
+
         return (ret_msg[0].data[0])
 
     def write_byte(self, address):
@@ -52,17 +52,17 @@ class CCS811(object):
 if __name__ == "__main__":
     my_ccs811 = CCS811()
     my_ccs811.reset()
-    
+
     time.sleep(1)
-    
+
     print(my_ccs811.read_byte(0x00))
     print(my_ccs811.read_byte(0x20))
 
     my_ccs811.start_app()
     time.sleep(1)
-    
+
     my_ccs811.read_byte(0x00)
-    
+
     while True:
         if my_ccs811.read_byte(0x00) == 152:
             time.sleep(0.0625)
@@ -82,5 +82,4 @@ if __name__ == "__main__":
                 my_ccs811.start_app()
 
             print(my_ccs811.read_byte(0x00))
-        time.sleep(1)
-    
+        time.sleep(1)  
