@@ -1,6 +1,7 @@
 from periphery import I2C, I2CError
 import time
-
+import requests
+import json
 
 class CCS811(object):
 
@@ -82,4 +83,4 @@ if __name__ == "__main__":
                 my_ccs811.start_app()
 
             print(my_ccs811.read_byte(0x00))
-        time.sleep(1)  
+        time.sleep(1)
