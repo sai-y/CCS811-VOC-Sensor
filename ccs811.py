@@ -1,7 +1,8 @@
 from periphery import I2C, I2CError
 import time
 import requests
-import json
+
+URL = "https://maker.ifttt.com/trigger/voc_data/with/key/{key}"
 
 class CCS811(object):
 
@@ -50,6 +51,16 @@ class CCS811(object):
         ret_msg = self.transfer(msgs)
         return ret_msg[0].data
 
+def post_data(data):
+    with open("/home/pi/key.ini") as key_file:
+        key = key_file.read()
+        payload = {'value1': data[0], 'value2': data[1]}
+        response = requests.post(URL.format(key=key), json=payload) 
+        if response.status_code == 200:
+            return 1
+        else:
+            return 0
+
 if __name__ == "__main__":
     my_ccs811 = CCS811()
     my_ccs811.reset()
@@ -63,6 +74,8 @@ if __name__ == "__main__":
     time.sleep(1)
 
     my_ccs811.read_byte(0x00)
+    measurement_time = time.time()
+    post_data[1, 2]
 
     while True:
         if my_ccs811.read_byte(0x00) == 152:
@@ -70,10 +83,13 @@ if __name__ == "__main__":
             my_ccs811.write_byte(0x02)
             time.sleep(0.0625)
             data = my_ccs811.read_bytes(8)
-            print(data)
+
             eco2 = data[0] << 8 | data[1]
             voc = data[2] << 8 | data[3]
             print(eco2, voc)
+
+            if (measurement_time - time.time()) > 900:
+                post_data([eco2, voc])
         else:
             if my_ccs811.read_byte(0x00) & 0x01:
                 my_ccs811.close()
@@ -82,5 +98,4 @@ if __name__ == "__main__":
                 time.sleep(1)
                 my_ccs811.start_app()
 
-            print(my_ccs811.read_byte(0x00))
         time.sleep(1)
