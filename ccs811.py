@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
     my_ccs811.read_byte(0x00)
     measurement_time = time.time()
-    post_data[1, 2]
+    print(post_data[1, 2])
 
     while True:
         if my_ccs811.read_byte(0x00) == 152:
@@ -89,6 +89,7 @@ if __name__ == "__main__":
             print(eco2, voc)
 
             if (measurement_time - time.time()) > 900:
+                measurement_time = time.time()
                 post_data([eco2, voc])
         else:
             if my_ccs811.read_byte(0x00) & 0x01:
