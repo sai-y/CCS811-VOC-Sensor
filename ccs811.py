@@ -56,7 +56,7 @@ def post_data(data):
     
     config = configparser.ConfigParser()
     config.read('/home/pi/key.ini')
-    key = config.get('key')
+    key = config.get('CREDENTIALS','key')
     payload = {'value1': data[0], 'value2': data[1]}
     print(URL.format(key=key))
     response = requests.post(URL.format(key=key), json=payload) 
