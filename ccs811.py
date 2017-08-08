@@ -1,6 +1,7 @@
 from periphery import I2C, I2CError
 import time
 import requests
+import configparser
 
 URL = "https://maker.ifttt.com/trigger/voc_data/with/key/{key}"
 
@@ -52,16 +53,16 @@ class CCS811(object):
         return ret_msg[0].data
 
 def post_data(data):
-    with open("/home/pi/key.ini") as key_file:
-        key = key_file.read()
-        payload = {'value1': data[0], 'value2': data[1]}
-        print(URL.format(key=key))
-        response = requests.post(URL.format(key=key), json=payload) 
-        print(response.status_code)
-        if response.status_code == 200:
-            return 1
-        else:
-            return 0
+    
+    config = configparser.ConfigParser()
+    config.read('/home/pi/key.ini')
+    key = config.get('key')
+    payload = {'value1': data[0], 'value2': data[1]}
+    print(URL.format(key=key))
+    response = requests.post(URL.format(key=key), json=payload) 
+    print(response.status_code)
+    if response.status_code == 200:
+        return 1
     return 0
 
 if __name__ == "__main__":
