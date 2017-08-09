@@ -92,9 +92,7 @@ if __name__ == "__main__":
             voc = data[2] << 8 | data[3]
             print(eco2, voc)
 
-            if (time.time() - measurement_time) > 900:
-                measurement_time = time.time()
-                post_data([eco2, voc])
+            
         else:
             if my_ccs811.read_byte(0x00) & 0x01:
                 my_ccs811.close()
