@@ -59,8 +59,10 @@ def post_data(data):
     key = config.get('CREDENTIALS','key')
     payload = {'value1': data[0], 'value2': data[1]}
     print(URL.format(key=key))
-    response = requests.post(URL.format(key=key), json=payload) 
-    print(response.status_code)
+    try:
+        response = requests.post(URL.format(key=key), json=payload) 
+    except requests.exceptions.ConnectionError as error:
+        print(str(error))
     if response.status_code == 200:
         return 1
     return 0
