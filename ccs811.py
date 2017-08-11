@@ -7,7 +7,7 @@ URL = "https://maker.ifttt.com/trigger/voc_data/with/key/{key}"
 
 class CCS811(object):
 
-    def __init__(self, device_bus=1, device_address=0x5B):
+    def __init__(self, device_bus=1, device_address=0x5A):
         self.device_bus = device_bus
         self.device_address = device_address
         self.bus = I2C("/dev/i2c-1")
