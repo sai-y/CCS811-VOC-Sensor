@@ -1,9 +1,11 @@
 from periphery import I2C, I2CError
 import time
+import blinkt
 import requests
 import configparser
 
 URL = "https://maker.ifttt.com/trigger/voc_data/with/key/{key}"
+
 
 class CCS811(object):
 
@@ -52,20 +54,34 @@ class CCS811(object):
         ret_msg = self.transfer(msgs)
         return ret_msg[0].data
 
+
 def post_data(data):
-    
+
     config = configparser.ConfigParser()
     config.read('/home/pi/key.ini')
-    key = config.get('CREDENTIALS','key')
+    key = config.get('CREDENTIALS', 'key')
     payload = {'value1': data[0], 'value2': data[1]}
     print(URL.format(key=key))
     try:
-        response = requests.post(URL.format(key=key), json=payload) 
+        response = requests.post(URL.format(key=key), json=payload)
     except requests.exceptions.ConnectionError as error:
         print(str(error))
     if response.status_code == 200:
         return 1
     return 0
+
+
+def FadeInOut(delay):
+    # Reference:
+    # https://github.com/dglaude/minecraftstatus-blinkt/blob/master/mc_blinkt_fade.py
+    for b in range(31):
+        set_brightness(b/31.0)
+        show()
+        time.sleep(delay)
+    for b in range(31):
+        set_brightness((31-b)/31.0)
+        show()
+        time.sleep(delay)
 
 if __name__ == "__main__":
     my_ccs811 = CCS811()
@@ -93,6 +109,15 @@ if __name__ == "__main__":
             eco2 = data[0] << 8 | data[1]
             voc = data[2] << 8 | data[3]
             print(eco2, voc)
+            if voc < 16: 
+                blinkt.set_all(0, 255, 0)
+                FadeInOut(0.1)
+            elif voc < 60:
+                blinkt.set_all(255, 255, 0)
+                FadeInOut(0.1)
+            else:
+                blinkt.set_all(255, 0, 0)
+                FadeInOut(0.1)
 
             if (time.time() - measurement_time) > 900:
                 measurement_time = time.time()
@@ -104,5 +129,3 @@ if __name__ == "__main__":
                 my_ccs811.reset()
                 time.sleep(1)
                 my_ccs811.start_app()
-
-        time.sleep(1)
