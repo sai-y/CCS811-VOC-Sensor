@@ -75,12 +75,12 @@ def FadeInOut(delay):
     # Reference:
     # https://github.com/dglaude/minecraftstatus-blinkt/blob/master/mc_blinkt_fade.py
     for b in range(31):
-        set_brightness(b/31.0)
-        show()
+        blinkt.set_brightness(b/31.0)
+        blinkt.show()
         time.sleep(delay)
     for b in range(31):
-        set_brightness((31-b)/31.0)
-        show()
+        blinkt.set_brightness((31-b)/31.0)
+        blinkt.show()
         time.sleep(delay)
 
 if __name__ == "__main__":
