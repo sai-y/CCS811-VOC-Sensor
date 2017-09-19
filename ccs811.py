@@ -87,13 +87,10 @@ if __name__ == "__main__":
     my_ccs811 = CCS811(device_address=0x5B)
     my_ccs811.reset()
 
-    time.sleep(1)
-
     print(my_ccs811.read_byte(0x00))
     print(my_ccs811.read_byte(0x20))
 
     my_ccs811.start_app()
-    time.sleep(1)
 
     my_ccs811.read_byte(0x00)
     measurement_time = time.time()
@@ -101,9 +98,7 @@ if __name__ == "__main__":
 
     while True:
         if my_ccs811.read_byte(0x00) == 152:
-            time.sleep(0.0625)
             my_ccs811.write_byte(0x02)
-            time.sleep(0.0625)
             data = my_ccs811.read_bytes(8)
 
             eco2 = data[0] << 8 | data[1]
