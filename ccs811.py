@@ -84,7 +84,7 @@ def FadeInOut(delay):
         time.sleep(delay)
 
 if __name__ == "__main__":
-    my_ccs811 = CCS811()
+    my_ccs811 = CCS811(device_address=0x5B)
     my_ccs811.reset()
 
     time.sleep(1)
