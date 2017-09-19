@@ -111,13 +111,13 @@ if __name__ == "__main__":
             print(eco2, voc)
             if voc < 16: 
                 blinkt.set_all(0, 255, 0)
-                FadeInOut(0.01)
+                FadeInOut(0.05)
             elif voc < 60:
                 blinkt.set_all(255, 255, 0)
-                FadeInOut(0.01)
+                FadeInOut(0.05)
             else:
                 blinkt.set_all(255, 0, 0)
-                FadeInOut(0.01)
+                FadeInOut(0.05)
 
             if (time.time() - measurement_time) > 900:
                 measurement_time = time.time()
