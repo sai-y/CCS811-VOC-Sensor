@@ -15,9 +15,9 @@ class CCS811(object):
         self.bus = I2C("/dev/i2c-1")
 
     def start_app(self):
-        my_ccs811.write_byte(0xF4)
-        print(my_ccs811.read_byte(0x00))
-        my_ccs811.write_byte_data(0x01, 0x10)
+        self.write_byte(0xF4)
+        print(self.read_byte(0x00))
+        self.write_byte_data(0x01, 0x10)
 
     def transfer(self, msgs):
         try:
