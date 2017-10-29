@@ -10,3 +10,5 @@ while True:
     sleep(1)
     blinkt.set_all(0, 0, 255)
     sleep(1)
+    blinkt.set_all(255, 255, 255)
+    sleep(1)
