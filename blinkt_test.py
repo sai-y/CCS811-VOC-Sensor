@@ -5,10 +5,8 @@ from time import sleep
 
 while True:
     blinkt.set_all(255, 0 , 0)
+    blikt.show()
     sleep(1)
     blinkt.set_all(0, 255, 0)
-    sleep(1)
-    blinkt.set_all(0, 0, 255)
-    sleep(1)
-    blinkt.set_all(255, 255, 255)
+    blinkt.show()
     sleep(1)
