@@ -1,6 +1,5 @@
 from periphery import I2C, I2CError
 import time
-import blinkt
 import requests
 import configparser
 
@@ -106,15 +105,6 @@ if __name__ == "__main__":
             eco2 = data[0] << 8 | data[1]
             voc = data[2] << 8 | data[3]
             print(eco2, voc)
-            if voc < 16: 
-                blinkt.set_all(0, 255, 0)
-                FadeInOut(0.05)
-            elif voc < 60:
-                blinkt.set_all(255, 255, 0)
-                FadeInOut(0.05)
-            else:
-                blinkt.set_all(255, 0, 0)
-                FadeInOut(0.05)
 
             if (time.time() - measurement_time) > 900:
                 measurement_time = time.time()
