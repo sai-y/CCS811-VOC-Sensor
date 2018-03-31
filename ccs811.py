@@ -86,6 +86,7 @@ if __name__ == "__main__":
     my_ccs811 = CCS811()
     my_ccs811.reset()
 
+    blinkt.set_clear_on_exit(value=True)
     
     print(my_ccs811.read_byte(0x00))
     print(my_ccs811.read_byte(0x20))
