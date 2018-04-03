@@ -96,7 +96,6 @@ if __name__ == "__main__":
 
     my_ccs811.read_byte(0x00)
     measurement_time = time.time()
-    print(post_data([1, 2]))
 
     while True:
         if my_ccs811.read_byte(0x00) == 152:
